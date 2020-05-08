@@ -40,8 +40,9 @@ const App = () => {
 
   return (
     <div className="container">
-      <div className="jumbotron text-center">
-        <h2>My Movie Collection</h2>
+      <h2 className="text-center">My Movie Collection</h2>
+      <div className="mb-3">
+        <img src="/Cinema.png" width="100%" height="auto"/>
       </div>
       {/* List all movies */}
       <div className="p3">
@@ -90,7 +91,9 @@ const App = () => {
 }
 
 const styles = {
-  container: {  },
+  headerImg: { 
+    backgroundImage: "url(/Cinema.png)"
+  },
   todo: {  marginBottom: 15 },
   input: {  },
   todoName: { },
