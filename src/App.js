@@ -43,25 +43,8 @@ const App = () => {
       <div className="jumbotron text-center">
         <h2>My Movie Collection</h2>
       </div>
-      {/* Add new movie */}
-      <div className="">
-        <h3>Add new movie</h3>
-        <input
-          onChange={event => setInput('title', event.target.value)}
-          style={styles.input}
-          value={formState.name} 
-          placeholder="Title"
-        />
-        <input
-          onChange={event => setInput('genre', event.target.value)}
-          style={styles.input}
-          value={formState.description}
-          placeholder="Genre"
-        />
-        <button style={styles.button} onClick={addMovie}>Add Movie</button>
-      </div>
       {/* List all movies */}
-      <div className="">
+      <div className="p3">
         <h3>Movies:</h3>
         <table className="table">
           <thead>
@@ -77,12 +60,30 @@ const App = () => {
               <tr>
                 <td>{movie.title}</td>
                 <td>{movie.genre}</td>
-                <td><button>Edit</button><button>Delete</button></td>
+                <td><button className="btn btn-warning mr-3">Edit</button><button className="btn btn-danger mr-3">Delete</button></td>
               </tr>
             ))
           }
           </tbody>
         </table>
+      </div>
+      {/* Add new movie */}
+      <div className="form-inline">
+        <label for="title" class="mr-sm-2">Title:</label>
+        <input
+          onChange={event => setInput('title', event.target.value)}
+          className="form-control"
+          value={formState.name} 
+          placeholder="Enter Title"
+        />
+        <label for="genre" class="ml-sm-2 mr-sm-2">Genre:</label>
+        <input
+          onChange={event => setInput('genre', event.target.value)}
+          className="form-control"
+          value={formState.description}
+          placeholder="Enter Genre"
+        />
+        <button className="btn btn-success ml-3" onClick={addMovie}>Add Movie</button>
       </div>
     </div>
   )
