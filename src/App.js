@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { API, graphqlOperation } from 'aws-amplify'
 import { createMovie } from './graphql/mutations'
 import { listMovies } from './graphql/queries'
+import { withAuthenticator } from '@aws-amplify/ui-react'
 
 const initialState = { name: '', description: '' }
 
@@ -101,4 +102,4 @@ const styles = {
   button: {  }
 }
 
-export default App
+export default withAuthenticator(App)

@@ -10,6 +10,11 @@
             "StackName": "amplify-mymdb-dev-120328",
             "StackId": "arn:aws:cloudformation:ap-southeast-2:310120250400:stack/amplify-mymdb-dev-120328/9f17a960-8e74-11ea-9490-0254a62a914c",
             "AmplifyAppId": "d3brsq8rym5gni"
+        },
+        "categories": {
+            "auth": {
+                "mymdb2816afe1": {}
+            }
         }
     }
 }
