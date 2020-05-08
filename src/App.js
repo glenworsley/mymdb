@@ -1,26 +1,78 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+/* src/App.js */
+import React, { useEffect, useState } from 'react'
+import { API, graphqlOperation } from 'aws-amplify'
+import { createMovie } from './graphql/mutations'
+import { listMovies } from './graphql/queries'
 
-function App() {
+const initialState = { name: '', description: '' }
+
+const App = () => {
+  const [formState, setFormState] = useState(initialState)
+  const [movies, setMovies] = useState([])
+
+  useEffect(() => {
+    fetchMovies()
+  }, [])
+
+  function setInput(key, value) {
+    setFormState({ ...formState, [key]: value })
+  }
+
+  async function fetchMovies() {
+    try {
+      const movieData = await API.graphql(graphqlOperation(listMovies))
+      const movies = movieData.data.listMovies.items
+      setMovies(movies)
+    } catch (err) { console.log('error fetching movies') }
+  }
+
+  async function addMovie() {
+    try {
+      if (!formState.name || !formState.description) return
+      const movie = { ...formState }
+      setMovies([...movies, movie])
+      setFormState(initialState)
+      await API.graphql(graphqlOperation(createMovie, {input: movie}))
+    } catch (err) {
+      console.log('error creating movie:', err)
+    }
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={styles.container}>
+      <h2>My Movie Collection</h2>
+      <input
+        onChange={event => setInput('title', event.target.value)}
+        style={styles.input}
+        value={formState.name} 
+        placeholder="Title"
+      />
+      <input
+        onChange={event => setInput('genre', event.target.value)}
+        style={styles.input}
+        value={formState.description}
+        placeholder="Genre"
+      />
+      <button style={styles.button} onClick={addMovie}>Create Movie</button>
+      {
+        movies.map((movie, index) => (
+          <div key={movie.id ? movie.id : index} style={styles.movie}>
+            <p style={styles.movieName}>{movie.title}</p>
+            <p style={styles.movieDescription}>{movie.genre}</p>
+          </div>
+        ))
+      }
     </div>
-  );
+  )
 }
 
-export default App;
+const styles = {
+  container: {  },
+  todo: {  marginBottom: 15 },
+  input: {  },
+  todoName: { },
+  todoDescription: {  },
+  button: {  }
+}
+
+export default App
