@@ -58,18 +58,31 @@ const App = () => {
           value={formState.description}
           placeholder="Genre"
         />
-        <button style={styles.button} onClick={addMovie}>Create Movie</button>
+        <button style={styles.button} onClick={addMovie}>Add Movie</button>
       </div>
       {/* List all movies */}
       <div className="">
-        {
-          movies.map((movie, index) => (
-            <div key={movie.id ? movie.id : index} style={styles.movie}>
-              <p style={styles.movieName}>{movie.title}</p>
-              <p style={styles.movieDescription}>{movie.genre}</p>
-            </div>
-          ))
-      }
+        <h3>Movies:</h3>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Genre</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+          {
+            movies.map((movie, index) => (
+              <tr>
+                <td>{movie.title}</td>
+                <td>{movie.genre}</td>
+                <td><button>Edit</button><button>Delete</button></td>
+              </tr>
+            ))
+          }
+          </tbody>
+        </table>
       </div>
     </div>
   )
