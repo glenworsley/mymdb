@@ -39,29 +39,38 @@ const App = () => {
   }
 
   return (
-    <div style={styles.container}>
-      <h2>My Movie Collection</h2>
-      <input
-        onChange={event => setInput('title', event.target.value)}
-        style={styles.input}
-        value={formState.name} 
-        placeholder="Title"
-      />
-      <input
-        onChange={event => setInput('genre', event.target.value)}
-        style={styles.input}
-        value={formState.description}
-        placeholder="Genre"
-      />
-      <button style={styles.button} onClick={addMovie}>Create Movie</button>
-      {
-        movies.map((movie, index) => (
-          <div key={movie.id ? movie.id : index} style={styles.movie}>
-            <p style={styles.movieName}>{movie.title}</p>
-            <p style={styles.movieDescription}>{movie.genre}</p>
-          </div>
-        ))
+    <div className="container">
+      <div className="jumbotron text-center">
+        <h2>My Movie Collection</h2>
+      </div>
+      {/* Add new movie */}
+      <div className="">
+        <h3>Add new movie</h3>
+        <input
+          onChange={event => setInput('title', event.target.value)}
+          style={styles.input}
+          value={formState.name} 
+          placeholder="Title"
+        />
+        <input
+          onChange={event => setInput('genre', event.target.value)}
+          style={styles.input}
+          value={formState.description}
+          placeholder="Genre"
+        />
+        <button style={styles.button} onClick={addMovie}>Create Movie</button>
+      </div>
+      {/* List all movies */}
+      <div className="">
+        {
+          movies.map((movie, index) => (
+            <div key={movie.id ? movie.id : index} style={styles.movie}>
+              <p style={styles.movieName}>{movie.title}</p>
+              <p style={styles.movieDescription}>{movie.genre}</p>
+            </div>
+          ))
       }
+      </div>
     </div>
   )
 }
