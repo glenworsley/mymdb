@@ -43,7 +43,7 @@ const App = () => {
     <div className="container">
       <h2 className="text-center">My Movie Collection</h2>
       <div className="mb-3">
-        <img src="/Cinema.png" width="100%" height="auto"/>
+        <img src="/Cinema.png" width="100%" height="auto" alt="cinema"/>
       </div>
       {/* List all movies */}
       <div className="p3">
@@ -59,7 +59,7 @@ const App = () => {
           <tbody>
           {
             movies.map((movie, index) => (
-              <tr>
+              <tr key={index}>
                 <td>{movie.title}</td>
                 <td>{movie.genre}</td>
                 <td><button className="btn btn-warning mr-3">Edit</button><button className="btn btn-danger mr-3">Delete</button></td>
@@ -71,14 +71,14 @@ const App = () => {
       </div>
       {/* Add new movie */}
       <div className="form-inline">
-        <label for="title" class="mr-sm-2">Title:</label>
+        <label className="mr-sm-2">Title:</label>
         <input
           onChange={event => setInput('title', event.target.value)}
           className="form-control"
           value={formState.name} 
           placeholder="Enter Title"
         />
-        <label for="genre" class="ml-sm-2 mr-sm-2">Genre:</label>
+        <label className="ml-sm-2 mr-sm-2">Genre:</label>
         <input
           onChange={event => setInput('genre', event.target.value)}
           className="form-control"
@@ -91,15 +91,5 @@ const App = () => {
   )
 }
 
-const styles = {
-  headerImg: { 
-    backgroundImage: "url(/Cinema.png)"
-  },
-  todo: {  marginBottom: 15 },
-  input: {  },
-  todoName: { },
-  todoDescription: {  },
-  button: {  }
-}
 
 export default withAuthenticator(App)
